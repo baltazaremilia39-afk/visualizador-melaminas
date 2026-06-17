@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Visualizador de Melaminas | Tableros San Miguel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f1ec;
+      color: #1f2d25;
+    }
+
+    header {
+      background: #143c2c;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      font-size: 16px;
+    }
+
+    .contenedor {
+      max-width: 1100px;
+      margin: auto;
+      padding: 25px;
+    }
+
+    .controles {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    select, button {
+      padding: 12px 18px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background: #143c2c;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      background: #0e2c20;
+    }
+
+    .visualizador {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    .visualizador img {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 15px;
+      display: block;
+      margin: auto;
+    }
+
+    .info {
+      margin-top: 18px;
+    }
+
+    .info h2 {
+      margin-bottom: 5px;
+      color: #143c2c;
+    }
+
+    .nota {
+      margin-top: 25px;
+      text-align: center;
+      font-size: 15px;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Visualizador de Melaminas</h1>
+  <p>Tableros San Miguel | Imagina tu proyecto antes de fabricarlo</p>
+</header>
+
+<div class="contenedor">
+
+  <div class="controles">
+    <select id="melamina" onchange="actualizarImagen()">
+      <option value="marmol-blanco">Mármol Blanco</option>
+      <option value="marmol-negro">Mármol Negro</option>
+      <option value="riviera">Riviera</option>
+      <option value="parota">Parota</option>
+      <option value="tzalam">Tzalam</option>
+      <option value="wengue">Wengué</option>
+    </select>
+
+    <button onclick="cambiarAmbiente('cocina')">Cocina</button>
+    <button onclick="cambiarAmbiente('closet')">Clóset</button>
+    <button onclick="cambiarAmbiente('recamara')">Recámara</button>
+    <button onclick="cambiarAmbiente('centro')">Centro TV</button>
+  </div>
+
+  <div class="visualizador">
+    <img id="imagenAmbiente" src="imagenes/marmol-blanco-cocina.jpg" alt="Vista previa de melamina">
+
+    <div class="info">
+      <h2 id="titulo">Mármol Blanco en Cocina</h2>
+      <p>Vista previa referencial para proyectos de carpintería y muebles a medida.</p>
+    </div>
+  </div>
+
+  <div class="nota">
+    Las imágenes son una representación visual. El tono puede variar ligeramente según iluminación, pantalla y lote del material.
+  </div>
+
+</div>
+
+<script>
+  let ambienteActual = "cocina";
+
+  const nombres = {
+    "marmol-blanco": "Mármol Blanco",
+    "marmol-negro": "Mármol Negro",
+    "riviera": "Riviera",
+    "parota": "Parota",
+    "tzalam": "Tzalam",
+    "wengue": "Wengué"
+  };
+
+  const ambientes = {
+    "cocina": "Cocina",
+    "closet": "Clóset",
+    "recamara": "Recámara",
+    "centro": "Centro TV"
+  };
+
+  function cambiarAmbiente(ambiente) {
+    ambienteActual = ambiente;
+    actualizarImagen();
+  }
+
+  function actualizarImagen() {
+    const melamina = document.getElementById("melamina").value;
+    const imagen = document.getElementById("imagenAmbiente");
+    const titulo = document.getElementById("titulo");
+
+    imagen.src = `imagenes/${melamina}-${ambienteActual}.jpg`;
+    titulo.innerText = `${nombres[melamina]} en ${ambientes[ambienteActual]}`;
+  }
+</script>
+
+</body>
+</html>
